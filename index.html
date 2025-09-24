@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Never Doom</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: linear-gradient(135deg, #000000 0%, #1a0f0f 50%, #000000 100%);
+                min-height: 100vh;
+                font-family: 'Arial', sans-serif;
+                color: #ff6b35;
+                overflow-x: hidden;
+                font-size: 1.5rem;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .title {
+                text-align: center;
+                font-size: 5rem;
+                font-weight: bold;
+                margin: 40px 0 60px 0;
+                background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02, #ff4500);
+                background-size: 300% 300%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: fireGradient 3s ease-in-out infinite alternate;
+                text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            }
+
+            @keyframes fireGradient {
+                0% {
+                    background-position: 0% 50%;
+                }
+                100% {
+                    background-position: 100% 50%;
+                }
+            }
+
+            .photo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 40px;
+            }
+
+            .photo-card {
+                background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 8px 32px rgba(255, 107, 53, 0.1);
+                border: 1px solid rgba(255, 107, 53, 0.2);
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .photo-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+                border-color: rgba(255, 107, 53, 0.5);
+            }
+
+            .photo-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: 1;
+            }
+
+            .photo-card:hover::before {
+                opacity: 1;
+            }
+
+            .photo-placeholder {
+                width: 100%;
+                height: 250px;
+                background: linear-gradient(135deg, #2a1810, #1a1a1a);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ff6b35;
+                font-size: 1.2rem;
+                border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+                position: relative;
+                z-index: 2;
+            }
+
+            .photo-info {
+                padding: 20px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .photo-title {
+                color: #ff6b35;
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-bottom: 8px;
+            }
+
+            .photo-description {
+                color: #cc5a2b;
+                line-height: 1.5;
+            }
+
+            .add-photo-btn {
+                background: linear-gradient(45deg, #ff6b35, #ff4500);
+                border: none;
+                color: white;
+                padding: 15px 30px;
+                border-radius: 25px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                cursor: pointer;
+                margin: 40px auto;
+                display: block;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            }
+
+            .add-photo-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+                background: linear-gradient(45deg, #ff7b45, #ff5510);
+            }
+
+            .flames-bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                opacity: 0.1;
+                background-image: radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(247, 147, 30, 0.2) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(255, 68, 0, 0.2) 0%, transparent 50%);
+                animation: flicker 4s ease-in-out infinite alternate;
+            }
+
+            @keyframes flicker {
+                0%, 100% {
+                    opacity: 0.1;
+                }
+                50% {
+                    opacity: 0.2;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .title {
+                    font-size: 2.5rem;
+                    margin: 20px 0 40px 0;
+                }
+
+                .photo-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+
+                .container {
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flames-bg"></div>
+
+        <div class="container">
+            <h1 class="title">Never Doom</h1>
+
+            <div class="photo-grid">
+                <!-- Sample photo cards - replace with your actual photos -->
+                <img src="assets/images/img1.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img3.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img8.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+            </div>
+
+            <div class="big-text">
+                Replace the fear of rejection with the fear of not living up to your full potential.
+                Make sure that, on your deathbed, you will think highly of yourself.
+                Take care and focus on yourself instead of trying to be like by people who don't even like themselves.
+            </div>
+
+            <div class="photo-grid">
+                <img src="assets/images/img11.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img5.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img6.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+            </div>
+            <div class="big-text">
+                You know deep down you could be better then you are now, BUT YOU MUST ACT. You know you can accomplish great feats, BUT YOU MUST ACT. You know you could be everything you ever dreamed of being, BUT YOU MUST ACT.
+                NEVER DOOM.
+            </div>
+            <div class="photo-grid">
+                <img src="assets/images/img7.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img2.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img10.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+            </div>
+            <div class="big-text">
+                Opportunities don’t wait until you’re ready. Miss them now and you miss them forever.
+            </div>
+            <div class="photo-grid">
+                <img src="assets/images/img4.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <img src="assets/images/img12.jpg" alt="Description of your photo" style="      width: 100%; height: 500px; object-fit: contain;">
+                <!--<img src="assets/images/img10.jpg" alt="Description of your photo" style="    width: 100%; height: 500px; object-fit: contain;">-->
+            </div>
+        </div>
+
+        <script>
+            // Add some interactive effects
+            document.addEventListener('DOMContentLoaded', function () {
+                const photoCards = document.querySelectorAll('.photo-card');
+
+                photoCards.forEach(card => {
+                    card.addEventListener('mouseenter', function () {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    });
+
+                    card.addEventListener('mouseleave', function () {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    });
+                });
+
+                // Add a subtle parallax effect to the title
+                window.addEventListener('scroll', function () {
+                    const title = document.querySelector('.title');
+                    const scrolled = window.pageYOffset;
+                    title.style.transform = `translateY(${scrolled * 0.1}px)`;
+                });
+            });
+        </script>
+    </body>
+</html>
